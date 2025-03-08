@@ -1,13 +1,11 @@
 import { configureStore } from '@reduxjs/toolkit'
 import { selectedFrameSlice } from './slices/selectedFrameSlice'
 import { selectedDemoSlice } from './slices/selectedDemoSlice'
-import { loadingDataSlice } from './slices/loadingDataSlice'
 
 export const store = configureStore({
   reducer: {
     selectedFrame: selectedFrameSlice.reducer,
     selectedDemo: selectedDemoSlice.reducer,
-    loadingData: loadingDataSlice.reducer,
   },
 })
 

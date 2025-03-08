@@ -37,11 +37,7 @@ function FrameCard({
   if (selectedFrame.mode === "view")
     return (
       <div className="border-2 border-gray-300 rounded-md overflow-hidden h-full flex align-middle justify-center items-center">
-        {frameIsLoading ? (
-          <iframe srcDoc={finalFrameHtml} title="frame" />
-        ) : (
-          <Loader />
-        )}
+        <iframe srcDoc={finalFrameHtml} title="frame" />
       </div>
     );
 

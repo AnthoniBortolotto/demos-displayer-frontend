@@ -5,6 +5,7 @@ import { setSelectedFrame } from "../../../redux/slices/selectedFrameSlice";
 import { useAppDispatch, useAppSelector } from "../../../helpers/utils/hooks";
 import FrameCard from "../../molecules/FrameCard/FrameCard";
 import FrameControlMenu from "../../molecules/FrameControlMenu/FrameControlMenu";
+import Loader from "../../atoms/Loader/Loader";
 
 interface FramesListProps {
   demoId: string;
@@ -13,7 +14,7 @@ interface FramesListProps {
 function FramesDisplayer({ demoId }: FramesListProps) {
   const [framesList, setFramesList] = useState<FrameType[] | null>(null);
   const dispatch = useAppDispatch();
-  const selectedFrame = useAppSelector((state) => state.selectedFrame.frame);
+  const { frame: selectedFrame, mode, FrameEdittedHtml} = useAppSelector((state) => state.selectedFrame);
   const [frameIsLoading, setframeIsLoading] = useState(true);
 
   useEffect(() => {
@@ -21,9 +22,9 @@ function FramesDisplayer({ demoId }: FramesListProps) {
       const sortedFrames = response.data.sort((a, b) => a.order - b.order);
       dispatch(setSelectedFrame(sortedFrames[0]));
       setFramesList(sortedFrames);
-      setframeIsLoading(true);
+      setframeIsLoading(false);
     });
-  }, [demoId]);
+  }, []);
 
   if (!framesList || !selectedFrame) {
     return (
@@ -63,12 +64,25 @@ function FramesDisplayer({ demoId }: FramesListProps) {
         style={{
           width: "100%",
           height: "100%",
-          padding: "2rem",
+          paddingTop: "2em",
+          paddingBottom: "2em",
           boxSizing: "border-box",
         }}
       >
-        {!frameIsLoading && <FrameControlMenu framesList={framesList} />}
-        <FrameCard frameIsLoading={frameIsLoading} html={selectedFrame.html} setFrameIsLoading={setframeIsLoading} />
+        <FrameControlMenu framesList={framesList} />
+        {frameIsLoading ? (
+          <div className="border-2 border-gray-300 rounded-md overflow-hidden h-full flex align-middle justify-center items-center">
+            <Loader />
+          </div>
+        ) : (
+          <>
+            <FrameCard
+              frameIsLoading={frameIsLoading}
+              html={selectedFrame.html}
+              setFrameIsLoading={setframeIsLoading}
+            />
+          </>
+        )}
       </div>
     </section>
   );
