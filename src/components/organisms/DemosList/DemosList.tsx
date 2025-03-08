@@ -1,9 +1,7 @@
-import { useDispatch } from "react-redux";
 import { GetDemosListResponseType } from "../../../services/responseTypes/GetDemosListResponseType";
 import DemoCard from "../../molecules/DemoCard/DemoCard";
-import { AppDispatch } from "../../../redux/store";
-import { useAppDispatch, useAppSelector } from "../../../helpers/utils/hooks";
-import { setFrame } from "../../../redux/slices/selectedFrameSlice";
+import { useAppDispatch } from "../../../helpers/utils/hooks";
+import { setSelectedDemo } from "../../../redux/slices/selectedDemoSlice";
 
 interface DemosListProps {
   demos: GetDemosListResponseType;
@@ -22,7 +20,7 @@ function DemosList({ demos }: DemosListProps) {
             title={demo.name}
             buttonText="Visualizar"
             onClick={() => {
-              
+                dispatch(setSelectedDemo(demo));
             }}
           />
         ))}

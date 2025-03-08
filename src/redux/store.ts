@@ -6,8 +6,8 @@ import { loadingDataSlice } from './slices/loadingDataSlice'
 export const store = configureStore({
   reducer: {
     selectedFrame: selectedFrameSlice.reducer,
-    selectedDemoSlice: selectedDemoSlice.reducer,
-    loadingDataSlice: loadingDataSlice.reducer,
+    selectedDemo: selectedDemoSlice.reducer,
+    loadingData: loadingDataSlice.reducer,
   },
 })
 

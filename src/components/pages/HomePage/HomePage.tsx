@@ -4,10 +4,12 @@ import "./HomePage.css";
 import { GetDemosListResponseType } from "../../../services/responseTypes/GetDemosListResponseType";
 import DemosList from "../../organisms/DemosList/DemosList";
 import { useAppSelector } from "../../../helpers/utils/hooks";
+import FramesDisplayer from "../../organisms/FramesDisplayer/FramesDisplayer";
 
 export default function HomePage() {
   const [demos, setDemos] = useState<GetDemosListResponseType | null>(null);
-  const selectedDemo = useAppSelector((state) => state.selectedDemoSlice.demo);
+  const selectedDemo = useAppSelector((state) => state.selectedDemo.demo);
+  const selectedFrame = useAppSelector((state) => state.selectedFrame.frame);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -18,9 +20,20 @@ export default function HomePage() {
     fetchData();
   }, []);
 
-
   if (selectedDemo) {
-    
+    return (
+      <main
+        style={{
+          width: "100%",
+          height: "100%",
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+        }}
+      >
+        <FramesDisplayer demoId={selectedDemo.id} />
+      </main>
+    );
   }
 
   if (!demos) {
