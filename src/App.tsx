@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import "./App.css";
+import { api } from "./services/api";
 
 
 function App() {
@@ -7,10 +8,8 @@ function App() {
 
   useEffect(() => {
     const fetchData = async () => {
-      const response = await fetch("http://localhost:3001/demos", {
-        method: "GET",
-      });
-      setDemos(await response.json());
+      const response = await api.getDemos();
+      setDemos(response.data);
     };
 
     fetchData();
@@ -28,8 +27,8 @@ function App() {
       {demos &&
         demos.map((demo: any) => (
           <div key={demo.id} className="card">
-            <h2 className="font-bold underline">{demo.name}</h2>
-            <button className="font-bold underline"
+            <h2 className="">{demo.name}</h2>
+            <button className=""
             >Visualizar</button>
           </div>
         ))}
