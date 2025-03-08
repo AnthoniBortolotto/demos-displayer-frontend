@@ -1,3 +1,3 @@
-import { GetDemoResponseType } from "./GetDemoResponseType";
+import { DemoType } from "../../helpers/types/demo";
 
-export type GetDemosListResponseType = GetDemoResponseType[];
+export type GetDemosListResponseType = DemoType[];

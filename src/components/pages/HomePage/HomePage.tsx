@@ -3,9 +3,11 @@ import { api } from "../../../services/api";
 import "./HomePage.css";
 import { GetDemosListResponseType } from "../../../services/responseTypes/GetDemosListResponseType";
 import DemosList from "../../organisms/DemosList/DemosList";
+import { useAppSelector } from "../../../helpers/utils/hooks";
 
 export default function HomePage() {
   const [demos, setDemos] = useState<GetDemosListResponseType | null>(null);
+  const selectedDemo = useAppSelector((state) => state.selectedDemoSlice.demo);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -15,6 +17,11 @@ export default function HomePage() {
 
     fetchData();
   }, []);
+
+
+  if (selectedDemo) {
+    
+  }
 
   if (!demos) {
     return (
