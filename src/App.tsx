@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import "./App.css";
 
+
 function App() {
   const [demos, setDemos] = useState<any>();
 
@@ -27,8 +28,9 @@ function App() {
       {demos &&
         demos.map((demo: any) => (
           <div key={demo.id} className="card">
-            <h2>{demo.name}</h2>
-            <button>Visualizar</button>
+            <h2 className="font-bold underline">{demo.name}</h2>
+            <button className="font-bold underline"
+            >Visualizar</button>
           </div>
         ))}
     </div>
