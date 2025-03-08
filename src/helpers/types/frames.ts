@@ -6,3 +6,5 @@ export type FrameType = {
   updatedAt: string; //  "2025-03-07T12:05:12.598Z";
   demoId: string; // "b1b1b1b1-b1b1-b1b1-b1b1-b1b1b1b1b1b1"
 };
+
+export type FrameMode = "view" | "edit";

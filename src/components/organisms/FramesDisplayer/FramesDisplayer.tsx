@@ -14,12 +14,14 @@ function FramesDisplayer({ demoId }: FramesListProps) {
   const [framesList, setFramesList] = useState<FrameType[] | null>(null);
   const dispatch = useAppDispatch();
   const selectedFrame = useAppSelector((state) => state.selectedFrame.frame);
+  const [frameIsLoading, setframeIsLoading] = useState(true);
 
   useEffect(() => {
     api.getFramesByDemoId(demoId).then((response) => {
       const sortedFrames = response.data.sort((a, b) => a.order - b.order);
       dispatch(setSelectedFrame(sortedFrames[0]));
       setFramesList(sortedFrames);
+      setframeIsLoading(true);
     });
   }, [demoId]);
 
@@ -45,25 +47,28 @@ function FramesDisplayer({ demoId }: FramesListProps) {
 
   return (
     <section
-    style={{
-      width: "100%",
-      height: "100%",
-      padding: "2rem",
-      boxSizing: "border-box",
-    }}
-    >
-      <h1 className="text-2xl font-bold mb-4">
-        Navegue pelos frames da demo escolhida
-      </h1>
-      
-      <div className="relative"  style={{
+      style={{
         width: "100%",
         height: "100%",
         padding: "2rem",
         boxSizing: "border-box",
-      }}>
-        <FrameControlMenu framesList={framesList} />
-        <FrameCard html={selectedFrame.html} />
+      }}
+    >
+      <h1 className="text-2xl font-bold mb-4">
+        Navegue pelos frames da demo escolhida
+      </h1>
+
+      <div
+        className="relative"
+        style={{
+          width: "100%",
+          height: "100%",
+          padding: "2rem",
+          boxSizing: "border-box",
+        }}
+      >
+        {!frameIsLoading && <FrameControlMenu framesList={framesList} />}
+        <FrameCard frameIsLoading={frameIsLoading} html={selectedFrame.html} setFrameIsLoading={setframeIsLoading} />
       </div>
     </section>
   );
