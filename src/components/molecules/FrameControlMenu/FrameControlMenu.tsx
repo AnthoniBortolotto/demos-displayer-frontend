@@ -20,7 +20,7 @@ function FrameControlMenu({
   const position = selectedFrame.frame?.order || 0;
 
   return (
-    <div className="flex items-center justify-between top-20 left-12 right-12 mb-2">
+    <div className="flex items-center justify-between top-20 left-12 right-12 pb-8">
       <div className="flex items-center space-x-4">
         <ControlMenuItem
           img="/frames/arrow-right.svg"

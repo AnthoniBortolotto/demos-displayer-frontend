@@ -14,7 +14,9 @@ interface FramesListProps {
 function FramesDisplayer({ demoId }: FramesListProps) {
   const [framesList, setFramesList] = useState<FrameType[] | null>(null);
   const dispatch = useAppDispatch();
-  const { frame: selectedFrame, mode, FrameEdittedHtml} = useAppSelector((state) => state.selectedFrame);
+  const { frame: selectedFrame } = useAppSelector(
+    (state) => state.selectedFrame
+  );
   const [frameIsLoading, setframeIsLoading] = useState(true);
 
   useEffect(() => {
@@ -48,28 +50,19 @@ function FramesDisplayer({ demoId }: FramesListProps) {
 
   return (
     <section
-      style={{
-        width: "100%",
-        height: "100%",
-        padding: "2rem",
-        boxSizing: "border-box",
-      }}
+      className="w-full h-full p-8 box-border"
     >
       <h1 className="text-2xl font-bold mb-4">
         Navegue pelos frames da demo escolhida
       </h1>
 
       <div
-        className="relative"
-        style={{
-          width: "100%",
-          height: "100%",
-          paddingTop: "2em",
-          paddingBottom: "2em",
-          boxSizing: "border-box",
-        }}
+        className="relative w-full min-h-full pb-8 box-border"
       >
-        <FrameControlMenu setFramesList={setFramesList} framesList={framesList} />
+        <FrameControlMenu
+          setFramesList={setFramesList}
+          framesList={framesList}
+        />
         {frameIsLoading ? (
           <div className="border-2 border-gray-300 rounded-md overflow-hidden h-full flex align-middle justify-center items-center">
             <Loader />
