@@ -9,15 +9,10 @@ import { addMessageOnIFrame } from "../../../helpers/utils/frames/addMessageOnIF
 
 interface FrameCardProps {
   html: string;
-  frameIsLoading: boolean;
   setFrameIsLoading: (value: boolean) => void;
 }
 
-function FrameCard({
-  html,
-  frameIsLoading = true,
-  setFrameIsLoading,
-}: FrameCardProps) {
+function FrameCard({ html, setFrameIsLoading }: FrameCardProps) {
   const [finalFrameHtml, setFinalFrameHtml] = useState("");
   const selectedFrame = useAppSelector((state) => state.selectedFrame);
   const dispatch = useAppDispatch();
@@ -28,7 +23,11 @@ function FrameCard({
       if (e.data === "triggered Double Click") dispatch(setFrameMode("edit"));
     });
 
-    const frameHtmlWithDoubleClickEvent = addMessageOnIFrame(html, "dblclick");
+    const frameHtmlWithDoubleClickEvent = addMessageOnIFrame(
+      html,
+      "dblclick",
+      "triggered Double Click"
+    );
 
     setFinalFrameHtml(frameHtmlWithDoubleClickEvent);
     setFrameIsLoading(false);
@@ -42,7 +41,11 @@ function FrameCard({
   if (selectedFrame.mode === "view")
     return (
       <div className="border-2 border-gray-300 rounded-md h-full flex align-middle justify-center items-center">
-        <iframe className="min-h-[80vh]" srcDoc={finalFrameHtml} title="frame" />
+        <iframe
+          className="min-h-[80vh]"
+          srcDoc={finalFrameHtml}
+          title="frame"
+        />
       </div>
     );
 
@@ -50,7 +53,7 @@ function FrameCard({
   return (
     <div className="border-2 border-gray-300 rounded-md overflow-hidden h-full flex align-middle justify-center items-center">
       <textarea
-        className="w-full h-full p-4"
+        className="w-full h-full p-4 min-h-[80vh]"
         value={selectedFrame.FrameEdittedHtml || ""}
         onChange={(e) => dispatch(setFrameEdditedHtml(e.target.value))}
       />

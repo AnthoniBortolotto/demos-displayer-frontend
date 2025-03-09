@@ -6,10 +6,14 @@ import DemosList from "../../organisms/DemosList/DemosList";
 import { useAppSelector } from "../../../helpers/utils/hooks";
 import FramesDisplayer from "../../organisms/FramesDisplayer/FramesDisplayer";
 import Loader from "../../atoms/Loader/Loader";
+import FramesList from "../../organisms/FramesList/FramesList";
+import { FrameType } from "../../../helpers/types/frames";
 
 export default function HomePage() {
   const [demos, setDemos] = useState<GetDemosListResponseType | null>(null);
+  const [framesList, setFramesList] = useState<FrameType[] | null>(null);
   const selectedDemo = useAppSelector((state) => state.selectedDemo.demo);
+  const selectedFrame = useAppSelector((state) => state.selectedFrame);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -20,10 +24,18 @@ export default function HomePage() {
     fetchData();
   }, []);
 
+  if (selectedFrame.frame && selectedDemo && framesList) {
+    return (
+      <main className="w-full h-full justify-center items-center">
+        <FramesDisplayer framesList={framesList} setFramesList={setFramesList} />
+      </main>
+    );
+  }
+
   if (selectedDemo) {
     return (
       <main className="w-full h-full justify-center items-center">
-        <FramesDisplayer demoId={selectedDemo.id} />
+        <FramesList framesList={framesList} setFramesList={setFramesList} demoId={selectedDemo.id} />
       </main>
     );
   }
