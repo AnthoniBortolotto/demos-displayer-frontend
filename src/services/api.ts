@@ -14,4 +14,7 @@ export const api = {
     const safeId = encodeURIComponent(demoId);
     return axios.get<GetFramesByDemoIdResponseType>(`/frames/demo/${safeId}`);
   },
+  putFrame(frameId: string, html: string) {
+    return axios.put(`/frames/${frameId}`, { html });
+  },
 };

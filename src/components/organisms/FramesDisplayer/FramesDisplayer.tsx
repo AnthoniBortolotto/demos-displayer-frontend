@@ -69,7 +69,7 @@ function FramesDisplayer({ demoId }: FramesListProps) {
           boxSizing: "border-box",
         }}
       >
-        <FrameControlMenu framesList={framesList} />
+        <FrameControlMenu setFramesList={setFramesList} framesList={framesList} />
         {frameIsLoading ? (
           <div className="border-2 border-gray-300 rounded-md overflow-hidden h-full flex align-middle justify-center items-center">
             <Loader />

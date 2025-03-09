@@ -23,8 +23,8 @@ function FrameCard({
   const dispatch = useAppDispatch();
 
   useEffect(() => {
+    setFrameIsLoading(true);
     window.addEventListener("message", function (e) {
-      console.log(e.data);
       if (e.data === "triggered Double Click") dispatch(setFrameMode("edit"));
     });
 
@@ -32,7 +32,12 @@ function FrameCard({
 
     setFinalFrameHtml(frameHtmlWithDoubleClickEvent);
     setFrameIsLoading(false);
-  }, []);
+    return () => {
+      window.removeEventListener("message", function (e) {
+        if (e.data === "triggered Double Click") dispatch(setFrameMode("edit"));
+      });
+    };
+  }, [html]);
 
   if (selectedFrame.mode === "view")
     return (
