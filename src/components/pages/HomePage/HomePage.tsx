@@ -5,11 +5,11 @@ import { GetDemosListResponseType } from "../../../services/responseTypes/GetDem
 import DemosList from "../../organisms/DemosList/DemosList";
 import { useAppSelector } from "../../../helpers/utils/hooks";
 import FramesDisplayer from "../../organisms/FramesDisplayer/FramesDisplayer";
+import Loader from "../../atoms/Loader/Loader";
 
 export default function HomePage() {
   const [demos, setDemos] = useState<GetDemosListResponseType | null>(null);
   const selectedDemo = useAppSelector((state) => state.selectedDemo.demo);
-  const selectedFrame = useAppSelector((state) => state.selectedFrame.frame);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -22,15 +22,7 @@ export default function HomePage() {
 
   if (selectedDemo) {
     return (
-      <main
-        style={{
-          width: "100%",
-          height: "100%",
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
-        }}
-      >
+      <main className="w-full h-full justify-center items-center">
         <FramesDisplayer demoId={selectedDemo.id} />
       </main>
     );
@@ -38,29 +30,14 @@ export default function HomePage() {
 
   if (!demos) {
     return (
-      <main
-        style={{
-          width: "100%",
-          height: "100%",
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
-        }}
-      >
-        <p>Carregando...</p>
+      <main className="w-full h-full justify-center items-center">
+        <Loader />
       </main>
     );
   }
 
   return (
-    <main
-      style={{
-        width: "100%",
-        height: "100%",
-        padding: "2rem",
-        boxSizing: "border-box",
-      }}
-    >
+    <main className="w-full h-full p-8 box-border">
       <DemosList demos={demos} />
     </main>
   );

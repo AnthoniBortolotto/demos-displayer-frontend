@@ -9,11 +9,10 @@ interface DemosListProps {
 
 function DemosList({ demos }: DemosListProps) {
   const dispatch = useAppDispatch();
-//  const result = useAppSelector(state => state.frame.value);
   return (
-    <section>
-      <h1>Lista de Demos</h1>
-      <div>
+    <section >
+      <h1 className="pb-8">Lista de Demos</h1>
+      <div className="flex flex-wrap gap-4">
         {demos.map((demo) => (
           <DemoCard
             key={demo.id}

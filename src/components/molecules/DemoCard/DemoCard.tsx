@@ -9,8 +9,8 @@ interface DemoCardProps {
 function DemoCard({ buttonText, onClick, title }: DemoCardProps) {
   return (
     <div className="card">
-      <h2 className="">{title}</h2>
-      <button className="" onClick={onClick}>{buttonText}</button>
+      <h2 className="pb-4">{title}</h2>
+      <button onClick={onClick}>{buttonText}</button>
     </div>
   );
 }
