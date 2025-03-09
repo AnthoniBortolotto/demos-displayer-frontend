@@ -3,7 +3,7 @@ import { GetDemosListResponseType } from "./responseTypes/GetDemosListResponseTy
 import { GetFramesByDemoIdResponseType } from "./responseTypes/GetFramesByDemoIdResponseType";
 
 const axios = Axios.create({
-  baseURL: "http://localhost:3001",
+  baseURL: import.meta.env.VITE_API_URL,
 });
 
 export const api = {

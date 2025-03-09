@@ -42,7 +42,7 @@ export default function HomePage() {
 
   if (!demos) {
     return (
-      <main className="w-full h-full justify-center items-center">
+      <main className="w-full h-full flex justify-center items-center">
         <Loader />
       </main>
     );
