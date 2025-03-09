@@ -55,7 +55,7 @@ function FramesList({ demoId, framesList, setFramesList }: FramesListProps) {
   return (
     <section className="w-full h-full p-8 box-border">
       <h1 className="text-2xl font-bold mb-4">
-        Navegue pelos frames da demo escolhida
+        Escolha o frame que deseja visualizar
       </h1>
 
       <div className="relative w-full min-h-full pb-8 box-border">
